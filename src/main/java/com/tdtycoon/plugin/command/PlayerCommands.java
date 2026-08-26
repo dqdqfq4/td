@@ -27,6 +27,7 @@ public class PlayerCommands implements CommandExecutor {
             case "camppanel" -> plugin.getCampRepairGUI().open(player);
             case "towerpanel" -> plugin.getTowerPanelGUI().open(player);
             case "prestige" -> doPrestige(player);
+            case "givecoins" -> giveCoins(player, args);
             default -> { return false; }
         }
         return true;
@@ -43,5 +44,20 @@ public class PlayerCommands implements CommandExecutor {
         data.setMaxSpace(data.getMaxSpace() + 5);
         data.setPrestige(data.getPrestige() + 1);
         player.sendMessage("§dPrestiged! You are now prestige " + data.getPrestige() + ".");
+    }
+
+    private void giveCoins(Player player, String[] args) {
+        if (args.length < 1) {
+            player.sendMessage("§cUsage: /givecoins <amount>");
+            return;
+        }
+        try {
+            long coins = Long.parseLong(args[0]);
+            PlayerData data = plugin.getPlayerDataManager().get(player.getUniqueId());
+            data.setCoins(data.getCoins() + coins);
+            player.sendMessage("§aGave yourself " + coins + " coins! Total: " + data.getCoins());
+        } catch (NumberFormatException e) {
+            player.sendMessage("§cInvalid amount.");
+        }
     }
 }
