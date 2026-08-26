@@ -11,6 +11,8 @@ plots:
   padding: 10
   # How many plots per row before wrapping to a new row.
   plots-per-row: 8
+  # Number of plots to pre-generate on server startup
+  pre-generate-count: 100
 
 # === Gameplay layout, relative to each plot's origin ===
 layout:
