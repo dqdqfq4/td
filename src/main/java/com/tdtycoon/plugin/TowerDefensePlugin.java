@@ -18,6 +18,7 @@ public class TowerDefensePlugin extends JavaPlugin {
     private static TowerDefensePlugin instance;
 
     private PlotManager plotManager;
+    private PlotVisualManager plotVisualManager;
     private TowerModelManager towerModelManager;
     private PlayerDataManager playerDataManager;
     private BuildCaptureManager buildCaptureManager;
@@ -41,6 +42,7 @@ public class TowerDefensePlugin extends JavaPlugin {
         playerDataManager = new PlayerDataManager(this);
         buildCaptureManager = new BuildCaptureManager(this);
         plotManager = new PlotManager(this);
+        plotVisualManager = new PlotVisualManager(this);
         towerManager = new TowerManager(this);
         campManager = new CampManager(this);
         waveManager = new WaveManager(this);
@@ -70,6 +72,7 @@ public class TowerDefensePlugin extends JavaPlugin {
         getCommand("camppanel").setExecutor(new PlayerCommands(this));
         getCommand("towerpanel").setExecutor(new PlayerCommands(this));
         getCommand("prestige").setExecutor(new PlayerCommands(this));
+        getCommand("givecoins").setExecutor(new PlayerCommands(this));
 
         waveManager.start();
         // refresh every player's HUD once a second
@@ -77,12 +80,16 @@ public class TowerDefensePlugin extends JavaPlugin {
         // autosave every 5 minutes
         getServer().getScheduler().runTaskTimer(this, playerDataManager::saveAll, 6000L, 6000L);
 
+        // Pre-generate plots on startup
+        new PlotPreGenerator(this).preGeneratePlots();
+
         getLogger().info("Tower Defense Tycoon enabled.");
     }
 
     @Override
     public void onDisable() {
         if (waveManager != null) waveManager.stop();
+        if (plotVisualManager != null) plotVisualManager.shutdown();
         if (playerDataManager != null) playerDataManager.saveAll();
         getLogger().info("Tower Defense Tycoon disabled.");
     }
@@ -90,6 +97,7 @@ public class TowerDefensePlugin extends JavaPlugin {
     public static TowerDefensePlugin get() { return instance; }
 
     public PlotManager getPlotManager() { return plotManager; }
+    public PlotVisualManager getPlotVisualManager() { return plotVisualManager; }
     public TowerModelManager getTowerModelManager() { return towerModelManager; }
     public PlayerDataManager getPlayerDataManager() { return playerDataManager; }
     public BuildCaptureManager getBuildCaptureManager() { return buildCaptureManager; }
