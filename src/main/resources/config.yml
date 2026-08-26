@@ -1,0 +1,42 @@
+# === Shared-world plot grid ===
+plots:
+  world: "world"
+  # Bottom-north-west corner of the ALREADY-BUILT template plot (index 0).
+  # Build your reference arena here: path, walls, camp spot, tower zones.
+  template-origin: { x: 0, y: 64, z: 0 }
+  # Size of one plot's bounding box, used both for block-copying new plots
+  # and for spacing them apart on the grid.
+  size: { x: 40, y: 20, z: 40 }
+  # Gap between plots so builds don't touch.
+  padding: 10
+  # How many plots per row before wrapping to a new row.
+  plots-per-row: 8
+
+# === Gameplay layout, relative to each plot's origin ===
+layout:
+  # Ordered list of waypoints attackers walk through, [x,y,z] relative to plot origin.
+  path-waypoints:
+    - [2, 65, 2]
+    - [2, 65, 20]
+    - [20, 65, 20]
+    - [20, 65, 38]
+  # Where the camp (the thing attackers damage) sits, relative to plot origin.
+  camp-spot: [20, 65, 38]
+  # Tower placement bounds, relative to plot origin (a box players can build towers inside).
+  bounds-min: [0, 64, 0]
+  bounds-max: [40, 70, 40]
+
+# === Economy / balance ===
+economy:
+  starting-coins: 0
+  starting-max-space: 20
+  starting-max-camp-health: 100
+  camp-repair-clicks-per-point: 2
+
+# === Waves ===
+waves:
+  attacker-base-health: 100
+  attacker-move-speed: 0.12       # blocks per tick
+  spawn-interval-ticks: 60
+  attackers-per-wave: 8
+  camp-damage-per-attacker: 5

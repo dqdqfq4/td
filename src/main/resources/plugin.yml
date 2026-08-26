@@ -1,0 +1,45 @@
+name: TowerDefenseTycoon
+version: '1.0.0'
+main: com.tdtycoon.plugin.TowerDefensePlugin
+api-version: '1.21'
+author: YourName
+description: A from-scratch recreation of the Tower Defense Tycoon gamemode.
+
+commands:
+  td:
+    description: Main admin/build command for Tower Defense Tycoon
+    usage: /td <subcommand>
+  copywand:
+    description: Get the region-select wand for capturing tower models
+  copydisplay:
+    description: Save your current selection as a tower model
+    usage: /copydisplay <zOffset> <model-name>
+  create_tower:
+    description: Register a new tower type
+    usage: /create_tower <model-name> <space> <price> <damage> <speed> <width> <height> <range>
+  rename:
+    description: Rename the tower item in your hand
+    usage: /rename <text...>
+  settoweritem:
+    description: Link the item in your hand to a tower model
+    usage: /settoweritem <model-name>
+  shopadd:
+    description: Add the tower item in your hand to the shop
+  shopremove:
+    description: Remove a tower from the shop
+  settowerupgrade:
+    description: Chain one tower model as an upgrade of another
+    usage: /settowerupgrade <base-model> <upgrade-model>
+  shop:
+    description: Open the tower shop
+  camppanel:
+    description: Open the camp repair panel
+  towerpanel:
+    description: Open the central tower panel (shop, pause, visit, prestige)
+  prestige:
+    description: Prestige your plot for permanent bonuses
+
+permissions:
+  towerdefense.admin:
+    description: Access to tower-building/admin commands
+    default: op
