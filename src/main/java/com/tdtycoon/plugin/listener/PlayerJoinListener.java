@@ -27,6 +27,12 @@ public class PlayerJoinListener implements Listener {
             data.setPlotIndex(plot.getIndex());
         }
 
+        // Build visual elements (path blocks, camp blocks) if not already done
+        plugin.getPlotVisualManager().buildPlotLayout(plot);
+
+        // Start particle effects at spawn point
+        plugin.getPlotVisualManager().startSpawnParticles(player.getUniqueId(), plot);
+
         player.teleport(plot.getOrigin().clone().add(2, 1, 2));
         player.sendMessage("§aWelcome back! Your plot is #" + plot.getIndex() + ".");
     }
@@ -36,5 +42,8 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         plugin.getPlayerDataManager().save(player.getUniqueId());
         plugin.getPlotManager().unloadPlot(player.getUniqueId());
+
+        // Stop particle effects when player logs out
+        plugin.getPlotVisualManager().stopSpawnParticles(player.getUniqueId());
     }
 }

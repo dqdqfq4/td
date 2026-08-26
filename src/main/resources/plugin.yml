@@ -38,6 +38,9 @@ commands:
     description: Open the central tower panel (shop, pause, visit, prestige)
   prestige:
     description: Prestige your plot for permanent bonuses
+  givecoins:
+    description: Give yourself coins (cheat command)
+    usage: /givecoins <amount>
 
 permissions:
   towerdefense.admin:
