@@ -115,7 +115,8 @@ public class TowerModelManager {
             yml.set(base + ".space", m.getSpaceCost());
             yml.set(base + ".price", m.getPrice());
             yml.set(base + ".damage", m.getDamage());
-            yml.set(base + ".speed", m.getSpeed().name());
+            // guard against null speed which can happen when a model is freshly captured
+            yml.set(base + ".speed", (m.getSpeed() != null) ? m.getSpeed().name() : TowerModel.Speed.MEDIUM.name());
             yml.set(base + ".width", m.getWidth());
             yml.set(base + ".height", m.getHeight());
             yml.set(base + ".range", m.getRange());
